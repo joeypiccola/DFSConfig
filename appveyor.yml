@@ -9,7 +9,7 @@ skip_commits:
 install:
   - ps: Install-PackageProvider -Name NuGet -Force
   - ps: Install-Module PsScriptAnalyzer -Force
-  - ps: Install-Module xPSDesiredStateConfiguration,PSDesiredStateConfiguration,xsmbshare,xDFS -force
+  - ps: Install-Module xPSDesiredStateConfiguration,xsmbshare,xDFS -force
    
 build: false
  
