@@ -3,7 +3,9 @@ Configuration DFSConfig
     param
     (
         [Parameter(Mandatory)]
-        [pscredential] $Credential
+        [System.Management.Automation.PSCredential]
+        [System.Management.Automation.CredentialAttribute()]
+        $Credential
     )
         
     Import-DscResource –ModuleName xPSDesiredStateConfiguration,PSDesiredStateConfiguration,xsmbshare,xDFS
