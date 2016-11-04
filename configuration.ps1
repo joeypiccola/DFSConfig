@@ -103,5 +103,14 @@ Configuration DFSConfig
             PsDscRunAsCredential = $Credential
             DependsOn            = @('[xDFSNamespaceRoot]DFSNamespaceRoot_Domain_Files_01','[xDFSNamespaceRoot]DFSNamespaceRoot_Domain_Files_02')
         }
+
+        xDFSNamespaceFolder DFSNamespaceFolder_cats
+        {
+            Path                 = '\\ad.piccola.us\files\stuff\cats' 
+            TargetPath           = '\\box.ad.piccola.us\dscmodules\xDFS'
+            Ensure               = 'present'
+            PsDscRunAsCredential = $Credential
+            DependsOn            = @('[xDFSNamespaceRoot]DFSNamespaceRoot_Domain_Files_01','[xDFSNamespaceRoot]DFSNamespaceRoot_Domain_Files_02')
+        }
     }
 }
