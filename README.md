@@ -1,15 +1,21 @@
 ![Build status](https://ci.appveyor.com/api/projects/status/go5gb3hsm8asca5r?svg=true&branch=master)
 # DFSConfig
 
-A demo DSC configuration for managing DFS. It leverages the xDFS DSC resource. 
+A demo DSC configuration for managing DFS with the XDFS resource. 
 
-## The Demo
+## Demo
 
-In the demo we'll create a branch of our DFSConfig repository named ChangeControl. Then we'll make an adjustment to our ChangeControl repository. We'll then wait for AppVeyor to run our health checks against changes. When our changes pass we'll manually merge them into our master branch. At that time we'll pull our master branch down to your pull server and publish the config.
+1. clone "copy" down our DFS configuration from source control
+2. create a new branch "another copy" of our DFS configuration
+3. make our changes to our new branch
+4. push our branch back up to source control 
+5. lets our tests run against our new branch
+6. if "passing" manually merge our new branch with our master branch
+7. initiate a pull from our DSC pull server to source control to get our latest and "passing" configuration
+8. initial an Update-DSCConfiguration on our DFS server
+9. be patient
 
-## How it works
-
-Build a configuraiton using the following xDFS resources. 
+## xDFS resource
 
 Create a domain-based DFS root
 ```powershell
@@ -24,7 +30,7 @@ xDFSNamespaceRoot DFSNamespaceRoot_Domain_Files_01
 }
 ```
 
-With our domain-based DFS root create a namespace folder with a target
+Create a namespace folder with a target
 ```powershell
 xDFSNamespaceFolder DFSNamespaceFolder_docs
 {
@@ -35,3 +41,7 @@ xDFSNamespaceFolder DFSNamespaceFolder_docs
 	DependsOn            = @('[xDFSNamespaceRoot]DFSNamespaceRoot_Domain_Files_01','[xDFSNamespaceRoot]DFSNamespaceRoot_Domain_Files_02')
 }
 ```
+
+## Notes
+
+This is a demo. This demo does not follow best practices and does not create a real CI pipeline. This is a demo.
