@@ -1,18 +1,18 @@
 version: 1.0.{build}
- 
+
 os: WMF 5
- 
+
 # Skip on updates to the readme
 skip_commits:
   message: /readme*/
-   
+
 install:
   - ps: Install-PackageProvider -Name NuGet -Force
   - ps: Install-Module PsScriptAnalyzer -Force
   - ps: Install-Module xPSDesiredStateConfiguration,xsmbshare,xDFS -force
-   
+
 build: false
- 
+
 test_script:
   - ps: |
       Add-AppveyorTest -Name "PsScriptAnalyzer" -Outcome Running
