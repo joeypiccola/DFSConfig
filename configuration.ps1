@@ -95,15 +95,6 @@ Configuration DFSConfig
             DependsOn            = @('[xDFSNamespaceRoot]DFSNamespaceRoot_Domain_Files_01','[xDFSNamespaceRoot]DFSNamespaceRoot_Domain_Files_02')
         }
 
-        xDFSNamespaceFolder DFSNamespaceFolder_scripts
-        {
-            Path                 = '\\ad.piccola.us\files\stuff\scripts' 
-            TargetPath           = '\\box.ad.piccola.us\dscmodules\scripts'
-            Ensure               = 'absent'
-            PsDscRunAsCredential = $Credential
-            DependsOn            = @('[xDFSNamespaceRoot]DFSNamespaceRoot_Domain_Files_01','[xDFSNamespaceRoot]DFSNamespaceRoot_Domain_Files_02')
-        }
-
         xDFSNamespaceFolder DFSNamespaceFolder_dogs
         {
             Path                 = '\\ad.piccola.us\files\stuff\dogs' 
