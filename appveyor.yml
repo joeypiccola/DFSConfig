@@ -15,16 +15,16 @@ build: false
 
 test_script:
   - ps: |
-    Add-AppveyorTest -Name "PsScriptAnalyzer" -Outcome Running
-    $PSSAResult = Invoke-ScriptAnalyzer -Path .\configuration.ps1 -ExcludeRule PSUseBOMForUnicodeEncodedFile
-    if ($PSSAResult) {
+      Add-AppveyorTest -Name "PsScriptAnalyzer" -Outcome Running
+      $PSSAResult = Invoke-ScriptAnalyzer -Path .\configuration.ps1 -ExcludeRule PSUseBOMForUnicodeEncodedFile
+      if ($PSSAResult) {
         $PSSAResultString = $PSSAResuls | Out-String
         Write-Warning $PSSAResultString
         Add-AppveyorMessage -Message "PSScriptAnalyzer output contained one or more result(s) with 'Error' severity. Check the 'Tests' tab of this build for more details." -Category Error
         Update-AppveyorTest -Name "PsScriptAnalyzer" -Outcome Failed -ErrorMessage $ResultString        
-    }
-    else {
+      }
+      else {
         $PSSAResult = $true
-    }
-
-    write-host $PSSAResult
+      }
+      
+      write-host $PSSAResult
