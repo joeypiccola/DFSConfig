@@ -26,7 +26,8 @@ test_script:
       else {
         $PSSAResult = $true
       }
-      
+      write-output $PSSAResult
+
       Add-AppveyorTest -Name 'PsScriptCompile' -Outcome Running
       $PSRNRun = .\configuration.ps1
       $PSRNResult = $?
@@ -39,14 +40,4 @@ test_script:
       else {
         $PSRNResult = $true
       }
-      
-      
-      
-      
-      if ($PSSAResults -and $PSRNResults) {
-        Update-AppveyorTest -Name "PsScriptAnalyzer" -Outcome Passed
-        Update-AppveyorTest -Name "PsScriptCompile" -Outcome Passed
-      }
-      else {
-        Throw "Build failed"    
-      }
+      write-output $PSRNResult
