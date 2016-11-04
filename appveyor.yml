@@ -27,27 +27,4 @@ test_script:
         $PSSAResult = $true
     }
 
-
-    Add-AppveyorTest -Name 'PsScriptCompile' -Outcome Running
-    $PSRNRun = .\configuration.ps1
-    $PSRNResult = $?
-    if ($PSRNResult -eq $false) {
-        $PSRNResultString = $PSRNResult | Out-String
-        Write-Warning $PSRNResultString
-        Add-AppveyorMessage -Message "Script has a syntax issue" -Category Error
-        Update-AppveyorTest -Name "PsScriptCompile" -Outcome Failed -ErrorMessage $ResultString    
-    }
-    else {
-        $PSRNResult = $true
-    }
-
-
-
-
-    if ($PSSAResults -and $PSRNResults) {
-        Update-AppveyorTest -Name "PsScriptAnalyzer" -Outcome Passed
-        Update-AppveyorTest -Name "PsScriptCompile" -Outcome Passed
-    }
-    else {
-        Throw "Build failed"    
-    }
+    write-host $PSSAResult
