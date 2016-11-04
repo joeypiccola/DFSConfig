@@ -3,7 +3,13 @@
 
 A demo DSC configuration for managing DFS with the XDFS resource. 
 
-## Demo
+## Demo 'accidents happen'
+
+1. go and delete the entire File domain-based namespace.
+2. initiate an Update-DSCConfiguration on our DFS server
+3. be patient
+
+## Demo 'source control'
 
 1. clone "copy" down our DFS configuration from source control
 2. create a new branch "another copy" of our DFS configuration
@@ -12,7 +18,7 @@ A demo DSC configuration for managing DFS with the XDFS resource.
 5. lets our tests run against our new branch
 6. if "passing" manually merge our new branch with our master branch
 7. initiate a pull from our DSC pull server to source control to get our latest and "passing" configuration
-8. initial an Update-DSCConfiguration on our DFS server
+8. initiate an Update-DSCConfiguration on our DFS server
 9. be patient
 
 ## xDFS resource
