@@ -15,9 +15,10 @@ A demo DSC configuration for managing DFS with the XDFS resource.
 2. create a new branch "another copy" of our DFS configuration
 3. make our changes to our new branch
 4. push our branch back up to source control 
-5. lets our tests run against our new branch
+5. let our tests run against our new branch
 6. if "passing" manually merge our new branch with our master branch
 7. initiate a pull from our DSC pull server to source control to get our latest and "passing" configuration
+8. publish our new config with Publish-DSCMofAndModule
 8. initiate an Update-DSCConfiguration on our DFS server
 9. be patient
 
