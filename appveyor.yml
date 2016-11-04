@@ -41,3 +41,11 @@ test_script:
         $PSRNResult = $true
       }
       write-output $PSRNResult
+
+      if ($PSSAResult -and $PSRNResult) {
+        Update-AppveyorTest -Name "PsScriptAnalyzer" -Outcome Passed
+        Update-AppveyorTest -Name "PsScriptCompile" -Outcome Passed
+      }
+      else {
+        Throw "Build failed"    
+      }
