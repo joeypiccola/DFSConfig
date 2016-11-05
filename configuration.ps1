@@ -8,7 +8,7 @@ Configuration DFSConfig
         $Credential
     )
         
-    Import-DscResource �ModuleName xPSDesiredStateConfiguration,PSDesiredStateConfiguration,xsmbshare,xDFS
+    Import-DscResource -ModuleName xPSDesiredStateConfiguration,PSDesiredStateConfiguration,xsmbshare,xDFS
 
     Node localhost
     {
