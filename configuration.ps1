@@ -8,7 +8,7 @@ Configuration DFSConfig
         $Credential
     )
         
-    Import-DscResource –ModuleName xPSDesiredStateConfiguration,PSDesiredStateConfiguration,xsmbshare,xDFS
+    Import-DscResource ï¿½ModuleName xPSDesiredStateConfiguration,PSDesiredStateConfiguration,xsmbshare,xDFS
 
     Node localhost
     {
@@ -31,6 +31,13 @@ Configuration DFSConfig
             Type            = 'Directory'
         }
 
+        File DFSRootDirectoryOffices
+        {
+            Ensure          = 'Present'
+            DestinationPath = 'c:\dfsroots\Offices'
+            Type            = 'Directory'
+        }
+
         xSMBShare DFSRootShare
         {
             DependsOn  = '[File]DFSRootDirectory'
@@ -40,6 +47,16 @@ Configuration DFSConfig
             Path       = 'C:\DFSRoots\Files'
             Ensure     = 'Present'
         }
+
+        xSMBShare DFSRootShareOffices
+        {
+            DependsOn  = '[File]DFSRootDirectoryOffices'
+            Name       = 'Files'
+            FullAccess = 'ad\domain admins'
+            ReadAccess = 'Everyone'
+            Path       = 'C:\DFSRoots\Offices'
+            Ensure     = 'Present'
+        }        
 
         File stuff
         {
@@ -77,6 +94,25 @@ Configuration DFSConfig
             PsDscRunAsCredential = $Credential
         }
 
+        xDFSNamespaceRoot DFSNamespaceRoot_Domain_Offices_01
+        {
+            DependsOn            = @('[xSMBShare]DFSRootShare','[WindowsFeature]DFSFileServices','[xDFSNamespaceServerConfiguration]DFSNamespaceConfig')
+            Path                 = '\\ad.piccola.us\Offices'
+            TargetPath           = '\\dfs01.ad.piccola.us\Offices'
+            Ensure               = 'present'
+            Type                 = 'DomainV2'
+            PsDscRunAsCredential = $Credential
+        }
+
+        xDFSNamespaceRoot DFSNamespaceRoot_Domain_Offices_02
+        {
+            DependsOn            = @('[xSMBShare]DFSRootShare','[WindowsFeature]DFSFileServices','[xDFSNamespaceServerConfiguration]DFSNamespaceConfig')
+            Path                 = '\\ad.piccola.us\Offices'
+            TargetPath           = '\\dfs02.ad.piccola.us\Offices'
+            Ensure               = 'present'
+            Type                 = 'DomainV2'
+            PsDscRunAsCredential = $Credential
+        }
         xDFSNamespaceFolder DFSNamespaceFolder_docs
         {
             Path                 = '\\ad.piccola.us\files\stuff\docs' 
@@ -112,5 +148,32 @@ Configuration DFSConfig
             PsDscRunAsCredential = $Credential
             DependsOn            = @('[xDFSNamespaceRoot]DFSNamespaceRoot_Domain_Files_01','[xDFSNamespaceRoot]DFSNamespaceRoot_Domain_Files_02')
         }
+
+        xDFSNamespaceFolder DFSNamespaceFolder_DAL
+        {
+            Path                 = '\\ad.piccola.us\offices\Dallas' 
+            TargetPath           = '\\box.ad.piccola.us\docs'
+            Ensure               = 'present'
+            PsDscRunAsCredential = $Credential
+            DependsOn            = @('[xDFSNamespaceRoot]DFSNamespaceRoot_Domain_Offices_01','[xDFSNamespaceRoot]DFSNamespaceRoot_Domain_Offices_02')
+        }    
+        
+        xDFSNamespaceFolder DFSNamespaceFolder_DEN
+        {
+            Path                 = '\\ad.piccola.us\offices\Denver' 
+            TargetPath           = '\\box.ad.piccola.us\docs'
+            Ensure               = 'present'
+            PsDscRunAsCredential = $Credential
+            DependsOn            = @('[xDFSNamespaceRoot]DFSNamespaceRoot_Domain_Offices_01','[xDFSNamespaceRoot]DFSNamespaceRoot_Domain_Offices_02')
+        } 
+        
+        xDFSNamespaceFolder DFSNamespaceFolder_BOS
+        {
+            Path                 = '\\ad.piccola.us\offices\Boston' 
+            TargetPath           = '\\box.ad.piccola.us\docs'
+            Ensure               = 'present'
+            PsDscRunAsCredential = $Credential
+            DependsOn            = @('[xDFSNamespaceRoot]DFSNamespaceRoot_Domain_Offices_01','[xDFSNamespaceRoot]DFSNamespaceRoot_Domain_Offices_02')
+        }         
     }
 }
