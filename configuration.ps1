@@ -51,7 +51,7 @@ Configuration DFSConfig
         xSMBShare DFSRootShareOffices
         {
             DependsOn  = '[File]DFSRootDirectoryOffices'
-            Name       = 'Files'
+            Name       = 'Offices'
             FullAccess = 'ad\domain admins'
             ReadAccess = 'Everyone'
             Path       = 'C:\DFSRoots\Offices'
