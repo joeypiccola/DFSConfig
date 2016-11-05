@@ -174,6 +174,15 @@ Configuration DFSConfig
             Ensure               = 'present'
             PsDscRunAsCredential = $Credential
             DependsOn            = @('[xDFSNamespaceRoot]DFSNamespaceRoot_Domain_Offices_01','[xDFSNamespaceRoot]DFSNamespaceRoot_Domain_Offices_02')
-        }         
+        }
+
+        xDFSNamespaceFolder DFSNamespaceFolder_SEA
+        {
+            Path                 = '\\ad.piccola.us\offices\Seattle' 
+            TargetPath           = '\\box.ad.piccola.us\docs'
+            Ensure               = 'present'
+            PsDscRunAsCredential = $Credential
+            DependsOn            = @('[xDFSNamespaceRoot]DFSNamespaceRoot_Domain_Offices_01','[xDFSNamespaceRoot]DFSNamespaceRoot_Domain_Offices_02')
+        } 
     }
 }
