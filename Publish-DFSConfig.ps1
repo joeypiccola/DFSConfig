@@ -20,8 +20,8 @@ Param (
 
 . .\configuration.ps1
 
-DFSConfig -OutputPath $OutputPath -ConfigurationData .\configdata.psd1 -credential $Credential
+DFSConfig -OutputPath .\mofs -ConfigurationData .\configdata.psd1 -credential $Credential
 # change the name of our mof from localhost to our configuratoin name
 Move-Item ".\mofs\`localhost.mof" ".\mofs\DFSConfig.mof" -Force
-Move-Item -Path .\mofs\DFSConfig.mof '\\dscpull01\c$\users\joey.piccola\Desktop\configs\DFSConfig.mof'
+Move-Item -Path .\mofs\DFSConfig.mof '\\dscpull01\c$\users\joey.piccola\Desktop\configs\DFSConfig.mof' -Force
 Invoke-Command -ComputerName dscpull01 -ScriptBlock {Publish-DSCModuleandMOF -source 'c:\users\joey.piccola\desktop\configs'}
