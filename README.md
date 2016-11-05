@@ -1,4 +1,4 @@
-![Build status](https://ci.appveyor.com/api/projects/status/go5gb3hsm8asca5r?svg=true&branch=master)
+![Build status](https://ci.appveyor.com/api/projects/status/go5gb3hsm8asca5r?svg=true&branch=dev)
 # DFSConfig
 
 A demo DSC configuration for managing DFS with the XDFS resource. 
