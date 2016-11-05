@@ -52,4 +52,4 @@ xDFSNamespaceFolder DFSNamespaceFolder_docs
 
 ## Notes
 
-This is a demo. This demo does not follow best practices and does not create a real CI pipeline. This is a demo.
+This is a demo. This demo does not follow best practices and does not create a real CI pipeline. The tests only verify a healthy PowerShell file. This is a demo.
